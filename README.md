@@ -1,75 +1,218 @@
 # ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-## Template Instructions
 
-Welcome,
+# Credit Card Customer Churn Analysis
 
-This is the Code Institute student template for the three Data Analytics capstone projects. We have preinstalled all of the tools you need to get started. It's perfectly okay to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
+## Project Overview
 
-You can safely delete the Template Instructions section of this README.md file and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
+This project analyses credit card customer data to identify the main factors associated with customer churn and predict customers at risk of leaving.
 
-If you are working on the first capstone project, you can also delete `.python-version`, `.slugignore`, `Procfile` and `setup.sh` as they are only required for later dashboard projects. 
+The project combines ETL, exploratory data analysis (EDA), machine learning, and Power BI to generate actionable insights that can support customer retention strategies.
+## Business Problem
 
-## How to use this repo
+Customer churn can negatively affect revenue and long-term customer relationships. This project investigates customer behaviour to identify the main drivers of churn and support targeted retention decisions.
+## Project Objectives
 
-1. Use this template to create your GitHub project repo. Click the **Use this template** button, then click **Create a new repository**.
+- Analyse customer churn patterns and key drivers.
+- Explore customer demographic and behavioural factors.
+- Build and compare machine learning models for churn prediction.
+- Identify the most important predictive features.
+- Present key insights through an interactive Power BI dashboard.
+## Dataset
 
-1. Copy the URL of your repository to your clipboard.
+Dataset used: Credit Card Customer Churn Dataset  
+Source: Kaggle  
+Format: CSV  
+Records: 10,127 customers  
+Target variable: Churn  
 
-1. In VS Code, select **File** -> **Open Folder**.
+https://www.kaggle.com/datasets/sakshigoyal7/credit-card-customers
 
-1. Select your `vscode-projects` folder, then click the **Select Folder** button on Windows, or the **Open** button on Mac.
+ ## Ethics and Responsible Use
 
-1. From the top menu in VS Code, select **Terminal** > **New Terminal** to open a new terminal.
+This project uses a public dataset from Kaggle for educational and analytical purposes.
 
-1. In the terminal, type `git clone` followed by the URL of your GitHub repository. Then hit **Enter**. This command will download all the files in your GitHub repository into your vscode-projects folder.
+The analysis focuses on customer churn patterns and does not attempt to identify individual customers. The results should be used to support business decisions rather than make decisions about customers solely based on model predictions.
+## Project Hypotheses
 
-1. In VS Code, select **File** > **Open Folder** again.
+The following hypotheses were investigated to identify key factors associated with customer churn:
 
-1. This time, navigate to and select the folder for the project you just downloaded. Then, click **Select Folder**.
+1. **Customer Inactivity**  
+   Customers with longer periods of inactivity are more likely to churn.
 
-1. A virtual environment is necessary when working with Python projects to ensure each project's dependencies are kept separate. You need to create your virtual environment, also called a venv, and then activate it whenever you return to your workspace.
-Click the gear icon in the lower left-hand corner of the screen to open the Manage menu and select **Command Palette** to open the VS Code command palette.
+2. **Transaction Frequency**  
+   Customers with lower transaction frequency are more likely to churn.
 
-1. In the command palette, type: *create environment* and select **Python: Create Environment…**
+3. **Transaction Amount**  
+   Customers with lower transaction amounts are more likely to churn.
 
-1. Choose **Venv** from the dropdown list.
+4. **Credit Utilisation**  
+   Credit utilisation differs significantly between existing and churned customers.
+## Methodology
 
-1. Choose the Python version you installed earlier. Currently, we recommend Python 3.12.8
+The project follows an end-to-end data analytics workflow:
 
-1. **DO NOT** click the box next to `requirements.txt`; you need to complete additional steps before installing your dependencies. Click **OK**.
+### 1. ETL and Data Preparation
+- Loaded the raw CSV dataset from Kaggle.
+- Assessed missing values, duplicates and data quality.
+- Removed unnecessary Naive Bayes classifier columns.
+- Retained relevant `Unknown` categories to avoid unnecessary data loss.
+- Created the binary `Churn` target variable.
+- Saved the cleaned dataset for further analysis.
 
-1. You will see a `.venv` folder appear in the file explorer pane, indicating that the virtual environment has been created.
+### 2. Exploratory Data Analysis (EDA)
+- Analysed customer demographics, financial characteristics and behaviour.
+- Compared existing and churned customers.
+- Conducted statistical hypothesis testing.
+- Identified important churn patterns and potential risk factors.
 
-1. **Important**: Note that the `.venv` folder is in the `.gitignore` file so that Git won't track it.
+### 3. Machine Learning
+- Built Logistic Regression and Random Forest classification models.
+- Evaluated models using Accuracy, Precision, Recall, F1 Score and ROC-AUC.
+- Compared model performance and analysed feature importance.
 
-1. Return to the terminal by clicking on the TERMINAL tab, or click on the **Terminal** menu and choose **New Terminal** if no terminal is currently open.
+### 4. Power BI
+- Developed an interactive three-page dashboard.
+- Presented churn KPIs, customer segments, churn drivers and predictive insights.
+- Added interactive filters to support business exploration.
+## Machine Learning Results
 
-1. In the terminal, use the command below to install your dependencies. This may take several minutes.
+Two classification models were developed and compared:
 
- ```console
- pip3 install -r requirements.txt
- ```
+| Model | Accuracy | Precision | Recall | F1 Score | ROC-AUC |
+|---|---:|---:|---:|---:|---:|
+| Logistic Regression | 90.0% | 76.8% | 53.8% | 63.3% | 91.7% |
+| **Random Forest** | **95.2%** | **93.2%** | **75.4%** | **83.3%** | **98.4%** |
 
-1. Open the `jupyter_notebooks` directory, and click on the notebook you want to open.
+### Selected Model
 
-1. Click the **Kernel** button, then choose **Python Environments**.
+**Random Forest** was selected as the final model because it achieved stronger overall performance and identified a higher proportion of churned customers.
 
-Note that the kernel says `Python 3.12.8` as it inherits from the venv, so it will be Python-3.12.8 if that is what is installed on your PC. To confirm this, you can use the command below in a notebook code cell.
+The model achieved **95.2% accuracy** and **98.4% ROC-AUC**, demonstrating strong predictive performance.
+## Key Insights
 
-```console
-! python --version
+The analysis identified several important patterns associated with customer churn:
+
+- **Customer inactivity:** Churned customers showed higher levels of inactivity.
+- **Transaction frequency:** Customers with fewer transactions were more likely to churn.
+- **Transaction amount:** Churned customers generally had lower transaction amounts.
+- **Credit utilisation:** Differences in credit utilisation were observed between existing and churned customers.
+- **Customer engagement:** Overall behavioural activity was more informative for churn risk than demographic characteristics.
+
+These findings suggest that changes in customer engagement and transaction behaviour can provide useful early indicators of churn.
+
+## Power BI Dashboard
+
+### Page 1 — Executive Overview
+
+![Executive Overview](dashboard/1%20executive_overview.png)
+
+### Page 2 — Churn Drivers
+
+![Churn Drivers](dashboard/2%20churn_drivers.png)
+
+### Page 3 — Predictive Insights
+
+![Predictive Insights](dashboard/3%20predictive_insights.png)
+
+### Dashboard File
+
+
+https://app.powerbi.com/links/DCSm2gQA7F?ctid=c233c072-135b-431d-af59-35e05babf941&pbi_source=linkShare
+
+## Business Recommendations
+
+Based on the analysis and predictive results, the following actions are recommended:
+
+- Prioritise customers with low transaction activity for retention campaigns.
+- Monitor customers showing increasing inactivity.
+- Target high-risk customer segments with personalised offers and engagement strategies.
+- Use the churn prediction model to support early identification of customers at risk of leaving.
+## Project Structure
+
+```text
+credit-card-customer-churn-analysis/
+│
+├── dashboard/
+│   ├── credit_card_churn_dashboard.pbix
+│   ├── 1 executive_overview.png
+│   ├── 2 churn_drivers.png
+│   ├── 3 predictive_insights.png
+│   └── model view.png
+│
+├── data/
+│   ├── raw/
+│   │   └── BankChurners.csv
+│   └── processed/
+│       └── bank_churners_clean.csv
+│
+├── jupyter_notebooks/
+│   ├── 01_ETL.ipynb
+│   ├── 02_EDA.ipynb
+│   └── 03_ML.ipynb
+│
+├── README.md
+├── requirements.txt
+└── .gitignore
 ```
+## Technologies Used
 
-## Deployment Reminders
+- **Python** – data processing, analysis and machine learning
+- **Pandas & NumPy** – data manipulation and numerical analysis
+- **Matplotlib & Seaborn** – data visualisation
+- **Scikit-learn** – machine learning and model evaluation
+- **Power BI** – interactive dashboard and business insights
+- **Jupyter Notebook** – ETL, EDA and ML development
+- **Git & GitHub** – version control and project management
+- **VS Code** – development environment
+## How to Run the Project
 
-* The `.python-version`, `.slugignore`, `Procfile` and `setup.sh` files are necessary only if you are deploying a Streamlit app to Heroku as part of your submission for units 2 and 3. 
-* Set the `.python-version` Python version to a [Heroku-22](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack, currently supported version that most closely matches what you used in this project.
-* The project can be deployed to Heroku using the following steps.
+1. Clone the repository:
 
-1. Log in to Heroku and create an App
-2. At the **Deploy** tab, select **GitHub** as the deployment method.
-3. Select your repository name and click **Search**. Once it is found, click **Connect**.
-4. Select the branch you want to deploy, then click **Deploy Branch**.
-5. The deployment process should happen smoothly if all deployment files are fully functional. Click the button **Open App** at the top of the page to access your App.
-6. If the slug size is too large, then add large files not required for the app to the `.slugignore` file.
+   git clone https://github.com/sepidehsomeh/credit-card-customer-churn-analysis.git
+
+2. Install the required dependencies:
+
+   pip install -r requirements.txt
+
+3. Run the Jupyter notebooks in the following order:
+
+   - `01_ETL.ipynb`
+   - `02_EDA.ipynb`
+   - `03_ML.ipynb`
+
+4. To explore the dashboard, open:
+
+   ` https://app.powerbi.com/links/DCSm2gQA7F?ctid=c233c072-135b-431d-af59-35e05babf941&pbi_source=linkShare`
+
+   using **Power BI Desktop**.
+## Testing and Validation
+
+The project was validated throughout the analytics workflow:
+
+- Data quality checks were performed for missing values, duplicates and data types.
+- Statistical hypothesis tests were used to validate relationships identified during EDA.
+- Machine learning models were evaluated on a separate test dataset.
+- Accuracy, Precision, Recall, F1 Score and ROC-AUC were used for model comparison.
+- Power BI visuals, filters and relationships were tested to ensure consistent results.
+## Conclusion
+
+This project demonstrates an end-to-end data analytics workflow for understanding and predicting credit card customer churn.
+
+The analysis identified customer engagement and transaction behaviour as important indicators of churn. The Random Forest model provided strong predictive performance, while the Power BI dashboard translated the findings into clear and actionable business insights.
+## Future Improvements
+
+Future development of the project could include:
+
+- Testing additional machine learning models and tuning model parameters.
+- Using more recent or larger customer datasets.
+- Deploying the predictive model for real-time churn prediction.
+- Integrating new customer data into the Power BI dashboard.
+- Developing automated alerts for customers with high churn risk.
+## Credits and Acknowledgements
+
+- Dataset sourced from **Kaggle**.
+- This project was developed as part of the **Data Analytics with AI** programme at **Code Institute**.
+- Special thanks to my instructor, **Vasi**, for his guidance, support, and feedback throughout the project.
+- Analysis, machine learning, Power BI dashboard development, and project documentation completed by **Sepideh Someh**.
+
