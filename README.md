@@ -183,7 +183,7 @@ credit-card-customer-churn-analysis/
 
 4. To explore the dashboard, open:
 
-   ` https://app.powerbi.com/links/DCSm2gQA7F?ctid=c233c072-135b-431d-af59-35e05babf941&pbi_source=linkShare`
+   https://app.powerbi.com/links/DCSm2gQA7F?ctid=c233c072-135b-431d-af59-35e05babf941&pbi_source=linkShare
 
    using **Power BI Desktop**.
 ## Testing and Validation
